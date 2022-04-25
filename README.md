@@ -1,4 +1,4 @@
-# esp-smart-water-heater
+# Esp smart water heater
 Esp32 based pcb to transform your boiler in a smart one and to integrate it into your domotic home.
 Any possibility of improvement is accepted.
 
@@ -8,4 +8,4 @@ With this board you can:
   - visualize data to an LCD
   - have a Wi-Fi capabilities to integrate the heater in your domotic network
 
-I've used an esp32 board powered from an AC-DC transoformer.
+I've used an esp32 board powered from an AC-DC transoformer. The temperature is measured with a digital thermometer. The LCD is a simple 8x2 display with I2C interface, used to visualize the temperature and the state of the water heater.
