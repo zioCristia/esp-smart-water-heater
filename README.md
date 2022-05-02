@@ -15,10 +15,10 @@ With this board you can:
   - visualize data to an LCD 
   - have a Wi-Fi capability to integrate the heater in your home network 
 
-I've used an esp32 board powered from an AC-DC transformer. The temperature is measured with a digital thermometer. The LCD is a simple 8x2 display with I2C interface, used to visualize the temperature and the state of the water heater.
+I've used an esp8266 board powered from an AC-DC transformer. The temperature is measured with a digital thermometer. The LCD is a simple 8x2 display with I2C interface, used to visualize the temperature and the state of the water heater.
 
 # Hardware
-I've used an esp8266 board, however also the esp32 could be used if made the necessary modifications to the [pcb](#pcb).
+I've used an esp8266 board to reduce the costs. However also the esp32 could be used if made the necessary modifications to the [pcb](#pcb).
 
 The relay I've used is 20A maximum which is sufficient for a 1200W water heater. Please change it in function of your power consumption. 
 
