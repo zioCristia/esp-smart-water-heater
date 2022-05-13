@@ -29,9 +29,12 @@ The software I’ve chosen is EspHome so that I could do Over The Air updates an
 
 To the default code you just need to add the lines for the control of the relay, the temperature sensor and the display. 
 
-You can find a complete exemple of the code here. 
+Below you can find a complete exemple of the code:
+
+### Home assistanta automations
+To automate the on/off of the boiler I've created some automations which you can find [here](https://github.com/zioCristia/energy-saver-ha-automations#water-heater-automations). They're possible thanks to another [component](https://github.com/zioCristia/esp-energy-monitor) that measure the power consumption of my house as well as the solar power production.
 
 # Pcb
-The pcb design has been made with Eagle and with the intention to have all the components in just one side. For a better communication you should add a 3-way JST connector also to the temperature sensor. 
+The pcb design has been made with Eagle and with the intention to have all the components in just one side of the board. For a better communication you should add a 3-way JST connector also to the temperature sensor. 
 
 I’ve added the place for an external button in case of some future implementations. 
