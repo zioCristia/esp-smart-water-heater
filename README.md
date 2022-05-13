@@ -7,6 +7,9 @@ Any possibility of improvement is accepted.
 * [Hardware](#hardware)
 * [Software](#software)
 * [Pcb](#pcb)
+* [Other usefull things about](#other-usefull-things-about)
+  * [Custom software component power on time](#custom-software-component-power-on-time)
+  * [Home assistant automations](#home-assistant-automations)
 
 # General info
 With this board you can: 
@@ -31,10 +34,20 @@ To the default code you just need to add the lines for the control of the relay,
 
 Below you can find a complete exemple of the code:
 
-### Home assistanta automations
-To automate the on/off of the boiler I've created some automations which you can find [here](https://github.com/zioCristia/energy-saver-ha-automations#water-heater-automations). They're possible thanks to another [component](https://github.com/zioCristia/esp-energy-monitor) that measure the power consumption of my house as well as the solar power production.
-
 # Pcb
 The pcb design has been made with Eagle and with the intention to have all the components in just one side of the board. For a better communication you should add a 3-way JST connector also to the temperature sensor. 
 
-I’ve added the place for an external button in case of some future implementations. 
+I’ve added the place for an external button in case of some future implementations.
+
+# Other usefull things about
+## Home assistant automations
+To automate the on/off of the boiler I've created some automations which you can find [here](https://github.com/zioCristia/energy-saver-ha-automations#water-heater-automations). They're possible thanks to another [component](https://github.com/zioCristia/esp-energy-monitor) that measure the power consumption of my house as well as the solar power production.
+
+## Custom software component power on time
+I've added to my Home Assistant configuration a custom component to monitor the time the water heater has been on. This does not exactly correspond to the time when the water heater consumes 1200W because the heating element turns on and off according to the temperature around it. 
+So, especially when we have reached the final temperature, the boiler is on but not active.
+
+Here it is the code:
+```
+```
+
