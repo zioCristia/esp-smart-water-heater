@@ -49,5 +49,12 @@ So, especially when we have reached the final temperature, the boiler is on but 
 
 Here it is the code:
 ```
+- platform: history_stats
+    name: Power on time wh
+    entity_id: switch.switch_boiler
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
 ```
 
