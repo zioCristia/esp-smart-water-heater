@@ -1,6 +1,8 @@
 # Esp smart water heater
 Esp8266 based pcb to transform your boiler in a smart one and to integrate it into your autonomous house. 
-Any possibility of improvement is accepted. 
+Any possibility of improvement is accepted.
+
+![alt text](/images/pcb-completed.jpg)
 
 ## Table of contenets
 * [General info](#general-info)
@@ -21,11 +23,29 @@ With this board you can:
 I've used an esp8266 board powered from an AC-DC transformer. The temperature is measured with a digital thermometer. The LCD is a simple 8x2 display with I2C interface, used to visualize the temperature and the state of the water heater.
 
 # Hardware
+The module is composed by:
+* esp8266
+* 8x2 lcd display with i2c interface
+* DS18B20 temperature Sensor
+* 20A external relay module
+* HLk-5M05 transformer
+* 4.7k ohm resistor
+* 10k ohm resistor
+* 10uF capacitor
+* 2N3904 transistor
+* external button
+
+The temperature sensor, the relay, the lcd display and the button are external components, connected to the pcb board thanks to 2.54mm pins or directly soldered in the board. The esp is connected thanks to female pins which allow a rapid change of the esp in case of failures. You can think to use jst connectors to avoid orientation problems.
+
 I've used an esp8266 board to reduce the costs. However also the esp32 could be used if made the necessary modifications to the [pcb](#pcb).
 
 The relay I've used is 20A maximum which is sufficient for a 1200W water heater. Please change it in function of your power consumption. 
 
-The transformer allows to have a more compact design of the pcb without the need to add an external one. You can even think to take the ac L and N from the boiler itself with proper care of short circuits. My connections are made with JST connector and a cable of 22awg. 
+The transformer allows to have a more compact design of the pcb without the need to add an external one. You can even think to take the ac L and N from the boiler itself with proper care of short circuits. My connections are made with JST connector and a cable of 22awg.
+
+You can easily change the 8x2 lcd with anyother i2c display just by modifying correspondently the code.
+
+![alt text](/images/pcb-completed.jpg)
 
 # Software
 The software I’ve chosen is EspHome so that I could do Over The Air updates and integrate it to my Home Assistant server.
@@ -34,10 +54,94 @@ To the default code you just need to add the lines for the control of the relay,
 
 Below you can find a complete exemple of the code:
 
+```
+esphome:
+  name: boiler
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "eb2c98bbb3b"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+captive_portal:
+
+# DS18B20 Temperature Sensor
+dallas:
+  - pin: 
+      number: 2
+      mode: 
+        output: False
+        analog: False
+        input: True
+        open_drain: False
+        pullup: False
+        pulldown: False
+      inverted: False
+    
+switch:
+  - platform: gpio
+    name: "Water heater switch"
+    pin: GPIO12
+    id: rele_boiler
+    restore_mode: ALWAYS_OFF
+
+sensor:
+  - platform: dallas
+    address: 0xd601131bd9e6e328
+    name: "Water heater temperature"
+    #update_interval: update_time
+    id: temperature_sensor
+    
+i2c:
+  sda: GPIO4
+  scl: GPIO5
+  
+display:
+  - platform: lcd_pcf8574
+    dimensions: 16x2
+    id: mydisplay_b
+    address: 0x27
+    lambda: |-
+      static bool bDisplay = true;
+      auto now = id(my_time).now(); // local time
+      if ((now.hour >= 23 || now.hour < 7) && bDisplay) {
+        id(mydisplay_b).no_backlight();;
+        bDisplay = false;
+      } else if ((now.hour >= 7 && now.hour < 23) && !bDisplay) {
+        id(mydisplay_b).backlight();;
+        bDisplay = true;
+      }
+      //it.print("Hello world!");
+      it.printf(0,0,"Stat %s", id(rele_boiler).state ? "ON" : "OFF");
+      it.printf(0,1,"T %4.1f C", id(sensore_temperatura).state);
+      
+time:
+- platform: sntp
+  id: my_time
+```
+
+This is the home assistant interface I have created for the water heater:
+
+![alt text](/images/ha-water-heater-view.jpg)
+
 # Pcb
 The pcb design has been made with Eagle and with the intention to have all the components in just one side of the board. For a better communication you should add a 3-way JST connector also to the temperature sensor. 
 
 I’ve added the place for an external button in case of some future implementations.
+
+![alt text](/images/circuit.jpg)
+![alt text](/images/pcb.jpg)
 
 # Other usefull things about
 ## Home assistant automations
