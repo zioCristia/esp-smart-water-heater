@@ -2,8 +2,6 @@
 Esp8266 based pcb to transform your boiler in a smart one and to integrate it into your autonomous house. 
 Any possibility of improvement is accepted.
 
-![alt text](/images/pcb-completed.jpg)
-
 ## Table of contenets
 * [General info](#general-info)
 * [Hardware](#hardware)
@@ -21,6 +19,8 @@ With this board you can:
   - have a Wi-Fi capability to integrate the heater in your home network 
 
 I've used an esp8266 board powered from an AC-DC transformer. The temperature is measured with a digital thermometer. The LCD is a simple 8x2 display with I2C interface, used to visualize the temperature and the state of the water heater.
+
+![alt text](/images/water-heater.png)
 
 # Hardware
 The module is composed by:
@@ -46,6 +46,7 @@ The transformer allows to have a more compact design of the pcb without the need
 You can easily change the 8x2 lcd with anyother i2c display just by modifying correspondently the code.
 
 ![alt text](/images/pcb-completed.jpg)
+![alt text](/images/pcb-completed-2.jpg)
 
 # Software
 The software I’ve chosen is EspHome so that I could do Over The Air updates and integrate it to my Home Assistant server.
@@ -140,8 +141,8 @@ The pcb design has been made with Eagle and with the intention to have all the c
 
 I’ve added the place for an external button in case of some future implementations.
 
-![alt text](/images/circuit.jpg)
-![alt text](/images/pcb.jpg)
+![alt text](/images/circuit.png)
+![alt text](/images/pcb.png)
 
 # Other usefull things about
 ## Home assistant automations
