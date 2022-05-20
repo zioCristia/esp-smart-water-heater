@@ -1,0 +1,74 @@
+esphome:
+  name: boiler
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "eb2c98bbb3b"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+captive_portal:
+
+# DS18B20 Temperature Sensor
+dallas:
+  - pin: 
+      number: 2
+      mode: 
+        output: False
+        analog: False
+        input: True
+        open_drain: False
+        pullup: False
+        pulldown: False
+      inverted: False
+    
+switch:
+  - platform: gpio
+    name: "Water heater switch"
+    pin: GPIO12
+    id: rele_boiler
+    restore_mode: ALWAYS_OFF
+
+sensor:
+  - platform: dallas
+    address: 0xd601131bd9e6e328
+    name: "Water heater temperature"
+    #update_interval: update_time
+    id: temperature_sensor
+    
+i2c:
+  sda: GPIO4
+  scl: GPIO5
+  
+display:
+  - platform: lcd_pcf8574
+    dimensions: 16x2
+    id: mydisplay_b
+    address: 0x27
+    lambda: |-
+      static bool bDisplay = true;
+      auto now = id(my_time).now(); // local time
+      if ((now.hour >= 23 || now.hour < 7) && bDisplay) {
+        id(mydisplay_b).no_backlight();;
+        bDisplay = false;
+      } else if ((now.hour >= 7 && now.hour < 23) && !bDisplay) {
+        id(mydisplay_b).backlight();;
+        bDisplay = true;
+      }
+      //it.print("Hello world!");
+      it.printf(0,0,"Stat %s", id(rele_boiler).state ? "ON" : "OFF");
+      it.printf(0,1,"T %4.1f C", id(sensore_temperatura).state);
+      
+time:
+- platform: sntp
+  id: my_time
