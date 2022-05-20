@@ -53,30 +53,9 @@ The software I’ve chosen is EspHome so that I could do Over The Air updates an
 
 To the default code you just need to add the lines for the control of the relay, the temperature sensor and the display. 
 
-Below you can find a complete exemple of the code:
+Below you can find the parts to add to the defalut EspHome code or you can find a complete example of the code [here](/water-heater.yaml.example):
 
 ```
-esphome:
-  name: boiler
-
-esp8266:
-  board: esp01_1m
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
-api:
-
-ota:
-  password: "eb2c98bbb3b"
-
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-
-captive_portal:
-
 # DS18B20 Temperature Sensor
 dallas:
   - pin: 
