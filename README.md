@@ -1,5 +1,5 @@
 # Esp smart water heater
-Esp8266 based pcb to transform your boiler into a smart one and to integrate it into your autonomous house. 
+Esp8266 based pcb to transform your boiler into a smart one and to integrate it into your autonomous home. 
 Any possibility of improvement is accepted.
 
 ## Table of contents
