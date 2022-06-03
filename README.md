@@ -2,6 +2,8 @@
 Esp8266 based pcb to transform your boiler into a smart one and to integrate it into your autonomous home. 
 Any possibility of improvement is accepted.
 
+You can find on Youtube an italian [video tutorial](https://youtu.be/jwHNBpo81dQ) about this project.
+
 ## Table of contents
 * [General info](#general-info)
 * [Hardware](#hardware)
