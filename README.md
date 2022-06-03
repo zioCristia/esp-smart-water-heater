@@ -120,6 +120,10 @@ The pcb design has been made with Eagle and with the intention to have all the c
 
 I’ve added the place for an external button in case of some future implementations.
 
+In case you will need some libraries to modify the files, just tell me.
+
+You can find the Eagle's files [here](/smart_water_heater).
+
 ![alt text](/images/circuit.png)
 ![alt text](/images/pcb.png)
 
