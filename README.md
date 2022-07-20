@@ -22,6 +22,8 @@ With this board you can:
 
 I've used an esp8266 board powered from an AC-DC transformer. The temperature is measured with a digital thermometer. The LCD is a simple 8x2 display with I2C interface, used to visualize the temperature and the state of the water heater.
 
+The total cost is less than 20€, or 30€ if you also buy the pcb board.
+
 ![alt text](/images/water-heater.png)
 
 # Hardware
